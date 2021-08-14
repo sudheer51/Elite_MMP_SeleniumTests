@@ -4,6 +4,7 @@ import org.iit.hc.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.openqa.selenium.io.FileHandler;
 
 public class LoginTests extends TestBase{
  
@@ -15,7 +16,9 @@ public class LoginTests extends TestBase{
 		driver.get("https://www.yahoo.com/");
 		String actual = driver.getTitle();
 		String expected="Google";
-		
+		Assert.assertEquals(actual,expected);
+	        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		FileHandler.copy(screenshotFile,new File("Google.jpg"));
 	}
 
 }
