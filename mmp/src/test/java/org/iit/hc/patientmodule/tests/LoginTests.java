@@ -12,7 +12,7 @@ import org.openqa.selenium.TakesScreenshot;
 public class LoginTests extends TestBase{
  
 	@Test
-	public void loginTests()
+	public void loginTests() throws IOException
 	{
 	 
 		 
