@@ -8,6 +8,7 @@ import org.openqa.selenium.io.FileHandler;
 import java.io.File;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import java.io.IOException;
 
 public class LoginTests extends TestBase{
  
