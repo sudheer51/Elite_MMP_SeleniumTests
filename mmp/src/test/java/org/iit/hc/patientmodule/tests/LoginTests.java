@@ -17,12 +17,12 @@ public class LoginTests extends TestBase{
 	{
 	 
 		 
-		driver.get("https://www.yahoo.com/");
+		driver.get("https://www.google.com/");
 		String actual = driver.getTitle();
 		String expected="Google";
-		Assert.assertEquals(actual,expected);
 	        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		FileHandler.copy(screenshotFile,new File("Google.jpg"));
+		Assert.assertEquals(actual,expected);
 	}
 
 }
