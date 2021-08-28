@@ -33,7 +33,7 @@ public class ScheduleAppointmentPage {
 		driver.switchTo().frame("myframe");
 		
 	
-		String output = AppLibrary.futureDate(10,"MM/dd/YYYY");
+		String output = AppLibrary.selectDate(10,"MM/dd/YYYY");
 		expectedHMap.put("Date",output);
 		
 		driver.findElement(By.id("datepicker")).sendKeys(output);

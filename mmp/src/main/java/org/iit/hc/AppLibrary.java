@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class AppLibrary {
 	
-	public static String futureDate(int days,String pattern)
+	public static String selectDate(int days,String pattern)
 	{
 
 		Calendar cal = Calendar.getInstance();
