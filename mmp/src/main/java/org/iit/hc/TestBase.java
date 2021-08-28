@@ -13,7 +13,7 @@ import org.testng.annotations.BeforeClass;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TestBase {
+public class TestBase {    
 
 	protected WebDriver driver ;
 	protected Properties pro;
