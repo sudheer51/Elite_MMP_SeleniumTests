@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.iit.hc.projConfig.projectConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,11 +17,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class TestBase {    
 
 	protected WebDriver driver ;
-	protected Properties pro;
+	public Properties pro;
 	@BeforeClass
 	public void instantiateDriver() throws IOException
 	{
-		loadProperties();
+		projectConfiguration pConf = new projectConfiguration();
+	    pro = pConf.loadProperties();
 		String browser = pro.getProperty("browser");
 		if(browser.equalsIgnoreCase("chrome")){
 			System.out.println("Inside if");
@@ -35,16 +37,11 @@ public class TestBase {
 		driver.manage().window().maximize();
 		System.out.println("LastLine of the instatiate method of TestBase");
 	}
-	public void loadProperties() throws IOException
-	{
-		pro = new Properties();
-		File f = new File(System.getProperty("user.dir") + "\\config\\config.properties");
-		FileInputStream fis = new FileInputStream(f);
-		pro.load(fis);
-	}
+	
+	
 	@AfterClass
 	public void closeBrowser()
 	{
-		//driver.quit();
+		driver.quit();
 	}
 }

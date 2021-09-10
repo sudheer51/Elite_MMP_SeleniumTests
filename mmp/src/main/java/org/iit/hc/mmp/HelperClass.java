@@ -18,8 +18,8 @@ public class HelperClass {
 	
 	public void login(String uname,String pword)
 	{
-		driver.findElement(By.id("username")).sendKeys(uname);
-		driver.findElement(By.id("password")).sendKeys(pword);
+		driver.findElement(By.xpath("//input[@id='username']")).sendKeys(uname);
+		driver.findElement(By.xpath("//input[@id='password']")).sendKeys(pword);
 		driver.findElement(By.cssSelector("input[value='Sign In']")).click();
 	}
 	public void navigateToAModule(String tabName)
