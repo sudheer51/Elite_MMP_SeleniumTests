@@ -1,6 +1,14 @@
 package org.iit.hc.mmp;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -44,6 +52,25 @@ public class HelperClass {
 		WebDriverWait wait = new WebDriverWait(driver,timeinSecs);
 		WebElement e= wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 		return e;
+	}
+	public void highLightElement(WebElement ele){
+		JavascriptExecutor js =(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].setAttribute('style', 'background:yellow; border:2px solid red;')", ele);
+	}
+	
+	public void captureScreenshot(String tc_Name) throws IOException
+	{
+		System.out.println("Inside Capturing Screenshot method");
+		TakesScreenshot tsh = (TakesScreenshot)driver;
+		File sourceFile = tsh.getScreenshotAs(OutputType.FILE);
+		System.out.println(sourceFile.getAbsolutePath());
+		String destinationPath = System.getProperty("user.dir")+"\\screenshots\\"+tc_Name+"_"+
+				Calendar.getInstance().getTimeInMillis()%1000000000+".jpg";
+		File destFile = new File(destinationPath); 
+		FileUtils.copyFile(sourceFile,destFile);
+		System.out.println(destinationPath);
+		System.out.println("Exiting Screenshot");
+		
 	}
 
 }
