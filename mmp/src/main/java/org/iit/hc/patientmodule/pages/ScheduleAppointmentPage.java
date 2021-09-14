@@ -1,8 +1,6 @@
 package org.iit.hc.patientmodule.pages;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.HashMap;
 
 import org.iit.hc.AppLibrary;
