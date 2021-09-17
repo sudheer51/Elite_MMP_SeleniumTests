@@ -55,7 +55,7 @@ public class HelperClass {
 	}
 	public void highLightElement(WebElement ele){
 		JavascriptExecutor js =(JavascriptExecutor)driver;
-		js.executeScript("arguments[0].setAttribute('style', 'background:yellow; border:2px solid red;')", ele);
+		js.executeScript("arguments[0].setAttribute('style', 'background:yellow; border:2px solid red;');", ele);
 	}
 	
 	public void captureScreenshot(String tc_Name) throws IOException
