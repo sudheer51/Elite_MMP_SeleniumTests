@@ -72,5 +72,8 @@ public class HelperClass {
 		System.out.println("Exiting Screenshot");
 		
 	}
+	public void switchToSideBar(){
+		driver.findElement(By.xpath("//div[@class='left-sidebar']")).click();
+	}
 
 }
