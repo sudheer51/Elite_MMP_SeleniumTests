@@ -1,8 +1,10 @@
 package org.iit.hc.mmp;
 
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -74,6 +76,48 @@ public class HelperClass {
 	}
 	public void switchToSideBar(){
 		driver.findElement(By.xpath("//div[@class='left-sidebar']")).click();
+	}
+	public void navigateToPatientServices(String serviceName){
+		WebElement we = driver.findElement(By.xpath("//input[@value='"+serviceName+"']"));
+		scrollIntoViewOfWebElement(we);
+		we.click();
+		System.out.println("Clicking the given ServiceName "+serviceName);
+	}
+	public void scrollIntoViewOfWebElement(WebElement we){
+		JavascriptExecutor js = ((JavascriptExecutor)driver);
+		js.executeScript("arguments[0].scrollIntoView(true);",we);
+		System.out.println("Scrolling down to the exact location" );
+	}
+	public WebDriver switchToAFrameAvailable(String frameId,int timeinSecs)
+	{
+		WebDriverWait wait = new WebDriverWait(driver,timeinSecs);
+		driver = wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameId));
+		return driver;
+	}
+	public void searchPatient(String pName, String SSN) throws InterruptedException {
+
+		driver.findElement(	By.id("search")).sendKeys(pName);
+		//driver.findElement(By.className("tfbutton")).click();
+		driver.findElement(By.xpath("//input[@value='search']")).click();
+		System.out.println(pName);
+		System.out.println(SSN);
+		Thread.sleep(3000);
+		List<WebElement> pLis = driver.findElements(By.xpath("//div[@id='show']/descendant::table/tbody/tr/td/a"));
+		for(int i=1;i<=pLis.size();i++){ 
+			
+			String s1 = driver.findElement(By.xpath("//div[@id='show']/descendant::table/tbody/tr["+i+"]/td[2]")).getText();
+		    String name = (pLis.get(i-1).getText()).trim();
+		    String s2 = s1.trim();
+		    System.out.println(name);
+		    System.out.println(s2);
+			if((name.equals(pName)) && (s2.equals(SSN))){
+				System.out.println("Inside if condition");
+				System.out.println(pLis.get(i-1).getText());
+				System.out.println(s1);
+				pLis.get(i-1).click();
+				break;
+			}
+		}	
 	}
 
 }
