@@ -1,13 +1,29 @@
 package org.iit.hc;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+
 public class AppLibrary {
 	
 	static Random rand;
+	static XSSFWorkbook workbook;
+	static XSSFSheet sheet;
+	
 	
 	public static String selectDate(int days,String pattern)
 	{
@@ -93,6 +109,154 @@ public class AppLibrary {
 		System.out.println("getRandomString Method returning "+s);
 		return s;
 	}
+	
+	public static String[][] readXls(String filePath) throws BiffException, IOException{
+
+		File srcFile = new File(filePath);
+		Workbook wb = Workbook.getWorkbook(srcFile);
+		Sheet sheet = wb.getSheet("MMPLogin");
+		int row = sheet.getRows();
+		int col = sheet.getColumns();
+		
+		String[][] str = new String[row][col];
+		
+		for (int i=0; i<row; i++){
+			for (int j=0;j<col; j++){
+				
+				Cell cell = sheet.getCell(j, i);
+				str[i][j] = cell.getContents().toString();
+			}
+		}
+		
+		return str;		
+	}
+	
+	public static String[][] readXlsx(String filePath) throws IOException{
+		
+		File srcFile = new File(filePath);
+		FileInputStream fis = new FileInputStream(srcFile);
+		XSSFWorkbook wb = new XSSFWorkbook(fis);
+		XSSFSheet sheet = wb.getSheetAt(0);
+		int row = sheet.getLastRowNum()+1;
+		int col = 2;
+		String[][] str = new String[row][col];
+		for (int i=0; i<row; i++){
+			str[i][0] = sheet.getRow(i).getCell(0).toString();
+			str[i][1] = sheet.getRow(i).getCell(1).toString();
+		}
+		wb.close();
+		return str;		
+		
+	}
+	public static String getFutureDate(int days,String pattern)
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, days);
+		Date d = cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		String date = sdf.format(d);
+		return date;
+	}
+	public  static String getFutureDate(int days)
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, days);
+		Date d = cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY");
+		String date = sdf.format(d);
+		return date;
+	}
+	//READING SPREADSHEET
+		public static void ExcelUtils(String excelPath, String sheetName) {
+			try {
+				//creating a reference variable for workbook and sheet.
+				workbook = new XSSFWorkbook(excelPath);
+				sheet = workbook.getSheet(sheetName);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		// Row count from excel sheet
+		public static int getRowCount() {
+			int rowCount = 0;
+			try {
+				rowCount = sheet.getLastRowNum()+1;
+				System.out.println("No of Rows: " + rowCount);
+
+			} catch (Exception exp) {
+				System.out.println(exp.getMessage());
+				System.out.println(exp.getCause());
+				exp.printStackTrace();
+			}
+			return rowCount;
+		}
+
+		// Total number of columns 
+		public static int getcolCount() {
+			int colCount = 0;
+			try 
+			{
+				colCount = sheet.getRow(0).getPhysicalNumberOfCells();
+			} 
+			catch (Exception exp) 
+			{
+				System.out.println(exp.getMessage());
+				System.out.println(exp.getCause());
+				exp.printStackTrace();
+			}
+			return colCount;
+		}
+		
+		public static String getCellDataString(int rowCount, int colCount) {
+			String cellData = null;
+			try {
+
+				cellData = sheet.getRow(rowCount).getCell(colCount).getStringCellValue();
+				//System.out.println("Using Excel util"+cellData);
+
+			} catch (Exception exp) {
+				System.out.println(exp.getMessage());
+				System.out.println(exp.getCause());
+				exp.printStackTrace();
+			}
+			return cellData;
+		}
+		public String[][] readXlsFile(String filepath,String SheetName) throws IOException
+		{
+			File f=new File(filepath);
+			FileInputStream fis=new FileInputStream(f);
+			
+			HSSFWorkbook hWB=new HSSFWorkbook(fis);
+			HSSFSheet sheet=hWB.getSheet(SheetName);
+			
+			//No of rows
+			int rows=sheet.getPhysicalNumberOfRows();
+			System.out.println("Row count:::" +rows);
+			
+			//no of columns
+			int cols=sheet.getRow(0).getLastCellNum();
+			System.out.println("Column count:::" +cols);
+			
+			int k=0;
+			
+			String[][] data=new String[rows-1][cols];
+			
+			//If the first row contains the column names
+			for(int i=1;i<rows;i++)
+			{
+				for(int j=0;j<cols;j++)
+				{
+					data[k][j]=sheet.getRow(i).getCell(j).toString();
+					System.out.println(data[k][j]);
+				}
+				k++;
+			}
+			hWB.close();		
+			return data;
+			
+		}
 	
 
 
