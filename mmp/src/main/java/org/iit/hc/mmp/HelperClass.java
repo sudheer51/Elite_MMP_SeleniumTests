@@ -97,7 +97,6 @@ public class HelperClass {
 	public void searchPatient(String pName, String SSN) throws InterruptedException {
 
 		driver.findElement(	By.id("search")).sendKeys(pName);
-		//driver.findElement(By.className("tfbutton")).click();
 		driver.findElement(By.xpath("//input[@value='search']")).click();
 		System.out.println(pName);
 		System.out.println(SSN);

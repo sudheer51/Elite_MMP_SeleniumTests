@@ -20,7 +20,7 @@ public class SendMessagesTests extends TestBase {
 	String adminUName;
 	String adminPassword;
 	
-	@Test
+	@Test(description="US_009 SendMessageTests",groups={"US_009","regression","sanity","patientmodule"})
 	public void sendMessage() throws Exception {
 		helperobj = new HelperClass(driver);
 		URL= pro.getProperty("patientportalurl");

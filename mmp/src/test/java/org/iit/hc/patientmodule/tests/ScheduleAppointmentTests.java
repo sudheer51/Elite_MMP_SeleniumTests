@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class ScheduleAppointmentTests extends TestBase{
 	
 	
-	@Test
+	@Test(description="US_004 Schedule Appointment",groups={"US_004","regression","sanity","patientmodule"})
 	public void validateScheduleAppointment()
 	{
 		String uname = pro.getProperty("PName");
