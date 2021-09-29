@@ -14,7 +14,7 @@ public class ViewInformationTests  extends TestBase{
 	String uName;
 	String pWord;
 	
-	@Test
+	@Test(description="US_005 View the information")
 	public void validateInformationMsg() {
 		
 		helperObj = new HelperClass(driver);

@@ -1,6 +1,5 @@
 package org.iit.hc.mmp;
 
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -21,6 +20,7 @@ public class HelperClass {
 	By search = By.xpath("//input[@type='button']");
 	By patientName = By.xpath("//div[@id='show']//table//tbody//tr//td[1]/a");
 	WebDriver driver ;
+	
 	public HelperClass(WebDriver driver)
 	{
 		this.driver = driver;
