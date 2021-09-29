@@ -14,7 +14,7 @@ public class LoginPatientTest extends TestBase{
 	String URL;
 	
 	
-	@Test
+	@Test(description="US_002_LoginTests",groups={"US_002","regression","sanity","patientmodule"})
 	public void loginTests() throws Exception {
 		helperObj=new HelperClass(driver);
 		URL=pro.getProperty("homepageurl");

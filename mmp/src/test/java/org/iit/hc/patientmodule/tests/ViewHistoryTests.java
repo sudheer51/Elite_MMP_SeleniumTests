@@ -12,7 +12,7 @@ public class ViewHistoryTests extends TestBase {
 	ViewHistoryPage VHPageobj;
 	//String URL = "http://96.84.175.78/MMP-Release2-Integrated-Build.6.8.000/portal/login.php";
 		
-	@Test(description="US_008 View History")
+	@Test(description="US_008 View History",groups={"US_008","regression","sanity","patientmodule"})
 	public void Viewhistory() {
 		String URL = pro.getProperty("patientportalurl");
 		helperObj = new HelperClass(driver);		

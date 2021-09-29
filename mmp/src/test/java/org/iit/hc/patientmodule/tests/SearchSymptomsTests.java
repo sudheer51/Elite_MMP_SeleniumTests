@@ -17,7 +17,7 @@ public class SearchSymptomsTests extends TestBase{
 	SoftAssert sa=new SoftAssert();
 	boolean result;
 	
-	@Test(dataProvider="DP_Symptoms")
+	@Test(dataProvider="DP_Symptoms",description="Search Symptoms",groups= {"US_010","regression","sanity","patientmodule"} )
 	public void SearchSymptomsvalidation(String DP_Symptoms) throws Exception {
 		helperObj = new HelperClass(driver);
 		String URL= pro.getProperty("patientportalurl");

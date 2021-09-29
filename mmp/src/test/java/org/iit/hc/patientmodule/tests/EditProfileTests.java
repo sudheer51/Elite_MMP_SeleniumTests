@@ -12,7 +12,7 @@ public class EditProfileTests extends TestBase{
 	HelperClass helperobj;
 	String Act = "Your Profile has been updated.";
 
-    @Test
+    @Test(description="US_003 UpdateProfile", groups={"US_003","regression","sanity","patientmodule"})
 	public void PatientProfilePage() throws Exception {
 		helperobj = new HelperClass(driver);
 		EPPageobj = new EditProfilePage(driver);
